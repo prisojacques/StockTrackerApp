@@ -1,25 +1,22 @@
-<div class="container2">
 <div class="container">
   <h1>STOCK TRACKER</h1>
   <h2>Enter the symbol of a stock to track (i.e AAPL, TSLA, GOOGL)</h2>
 
-  <div class="btn-toolbar">
-    <input
-      type="text"
-      placeholder="enter a symbol"
-      id="stockInput"
-    />
-
-
-      <button (click)="trackStock(); trackSymbolName()" class="btn" id="trackBtn" type="button">Track Stock</button>
-
-
-
+  <form [formGroup]="search" (ngSubmit)="trackStock()">
+    <div>
+      <input
+        type="text"
+        placeholder="enter a symbol"
+        id="stockInput"
+        formControlName="symbol"
+      />
+    </div>
+    <div>
+      <button class="btn" id="trackBtn" type="submit">Track Stock</button>
+    </div>
+  </form>
+  <div>
+    <app-stock  [quote]="result" [symbol]="result2" (onDelete)="deleteStock($event)"></app-stock>
 
   </div>
-  <div *ngIf="result.length>0">
-    <app-stock [input]="input"  [quote]="result" [symbol]="result2"></app-stock>
-
-  </div>
-</div>
 </div>
