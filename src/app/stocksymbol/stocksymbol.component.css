@@ -1,0 +1,16 @@
+.container {
+  padding: 2rem;
+  width: 60rem;
+  margin-left: 150px;
+}
+.btn-toolbar{
+  margin: 10px;
+  margin-left: 150px;
+}
+button{
+  margin: 13px 12px 12px 20px;
+  color: green;
+  background-color: aquamarine;
+
+}
+

@@ -1,0 +1,12 @@
+<div class="container" *ngFor="let s of symbol; let i = index">
+ <button class="button">&times; <h2>{{ s.description }}({{ s.symbol }})  &#10060;</h2> </button>
+
+
+  Change today: {{quote[i].d}}<br /><br />                 Opening price:{{quote[i].o}}<br /><br />
+
+  Current price:{{quote[i].c}}<br /><br />                 High price:{{quote[i].h}} <br /><br />
+
+  <button (click)="routeNavigate(s.symbol)" type="button">Go to social sentiment details > </button>
+</div>
+
+

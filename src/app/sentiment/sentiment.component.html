@@ -1,0 +1,8 @@
+<div class="container" *ngFor="let l of listMonth">
+  <h2> Change:{{l.change}}<br /><br />  MSPR:{{ l.mspi}}</h2>
+
+
+  <div>
+    <button (click)="stockNavigate()" type="button"> < Back to list of stocks </button>
+  </div>
+</div>
