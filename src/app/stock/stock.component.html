@@ -1,12 +1,25 @@
-<div class="container" *ngFor="let s of symbol; let i = index">
- <button class="button">&times; <h2>{{ s.description }}({{ s.symbol }})  &#10060;</h2> </button>
+<div class="container" *ngFor="let q of quote; let i = index">
 
 
-  Change today: {{quote[i].d}}<br /><br />                 Opening price:{{quote[i].o}}<br /><br />
+<div>
+  <button (click)="deleteById(i)" class="button"  type="button" id="remove{{symbol[i]}}}">  &#10060; </button>
 
-  Current price:{{quote[i].c}}<br /><br />                 High price:{{quote[i].h}} <br /><br />
+  <h2>{{ symbol[i].description }}({{ symbol[i].symbol }}) </h2>
 
-  <button (click)="routeNavigate(s.symbol)" type="button">Go to social sentiment details > </button>
+
+
+
+</div>
+<div class="stock-name">
+  Change today: {{q.d | percent}}<br /><br />                 Opening price: {{q.o | currency}}<br /><br />
+
+  Current price: {{q.c | currency}}<br /><br />                 High price: {{q.h | currency}} <br /><br />
+
+  <div class="container">
+
+  <button class="btn btn-primary" (click)="routeNavigate(symbol[i].description)" type="submit">Go to social sentiment details > </button>
+  </div>
+</div>
 </div>
 
 

@@ -1,6 +1,6 @@
 export interface Month {
   month: number;
-  mspi: number;
+  mspr: number;
   symbol: string;
   year: number;
   change: number;

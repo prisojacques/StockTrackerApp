@@ -16,3 +16,9 @@ button{
   top: 2px;
   background-color: transparent;
 }
+
+.btn-primary{
+  background-color: darkgray;
+  cursor: pointer;
+
+}

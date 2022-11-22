@@ -2,8 +2,10 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TrackingService} from "../tracking.service";
 import * as http from "http";
 import {Quote} from "../modele/Quote";
-import {lastValueFrom} from "rxjs";
+import {forkJoin, lastValueFrom} from "rxjs";
 import {Symbole} from "../modele/Symbole";
+import {HttpErrorResponse} from "@angular/common/http";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-stocksymbol',
@@ -12,40 +14,47 @@ import {Symbole} from "../modele/Symbole";
 })
 export class StocksymbolComponent implements OnInit {
 
+value!: string;
+result2!: any [];
+result!: Quote [];
+search!: FormGroup;
 
-
-input = '';
-
-  constructor(private trackingservice: TrackingService) {
-
+  constructor(private trackingservice: TrackingService, private fb: FormBuilder) {
+    this.search = this.fb.group({
+        symbol: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
+    this.result2 = this.trackingservice.getAllStocksData();
+    this.result = this.trackingservice.getAllQuoteData();
   }
 
-  async trackStock() {
-    this.input = ((<HTMLInputElement>document.getElementById('stockInput')).value);
-    const responseQuote = await lastValueFrom(this.trackingservice.getQuote(this.input));
-  this.addQuote(responseQuote);
-  }
 
-  async trackSymbolName() {
-    this.input = ((<HTMLInputElement>document.getElementById('stockInput')).value);
-    const responseSymbolName = await lastValueFrom(this.trackingservice.getSymbol(this.input));
-    this.addSymbole(responseSymbolName);
-    console.log(this.result2);
-  }
+  trackStock() {
+    this.value = this.search.controls["symbol"].value;
+    console.log(" ---> " + this.value);
 
-     get result(){
-    return this.trackingservice.result ??[] ;
-     }
-     get result2(){
-    return this.trackingservice.result2 ??[];
-     }
-      addQuote(quote: Quote){
-        this.result.push(quote);
+    this.trackingservice.getSymbol(this.value).subscribe({
+      next: (response) => {
+        this.result2 = this.trackingservice.getAllStocksData();
+      }, error: (err: HttpErrorResponse) => {
+        console.log(err.message);
       }
-      addSymbole(symbole: {description: string, symbol: string}){
-        this.result2.push(symbole);
+    });
+
+    this.trackingservice.getQuote(this.value).subscribe({
+      next: (response) => {
+        this.result = this.trackingservice.getAllQuoteData();
+      }, error: (err: HttpErrorResponse) => {
+        console.log(err.message);
       }
+    });
+
+  }
+
+  deleteStock(id: number) {
+    this.result2 = this.trackingservice.deleteStockById(id);
+    this.result = this.trackingservice.deleteQuoteById(id);
+  }
 }

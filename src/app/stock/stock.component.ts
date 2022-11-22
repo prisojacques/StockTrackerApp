@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Quote} from "../modele/Quote";
 import {Symbole} from "../modele/Symbole";
 import {Router} from "@angular/router";
@@ -12,6 +12,7 @@ export class StockComponent implements OnInit {
   @Input() input= '';
   @Input() quote!: Quote [];
   @Input() symbol!: any [];
+  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private route: Router) { }
 
@@ -23,4 +24,7 @@ export class StockComponent implements OnInit {
   }
 
 
+  deleteById(i: number) :void{
+    this.onDelete.emit(i);
+  }
 }

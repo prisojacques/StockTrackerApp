@@ -8,6 +8,8 @@ import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { SentimentComponent } from './sentiment/sentiment.component';
+import {TrackingService} from "./tracking.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { SentimentComponent } from './sentiment/sentiment.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [TrackingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

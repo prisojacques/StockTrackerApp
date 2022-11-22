@@ -32,6 +32,7 @@ export class SentimentComponent implements OnInit {
     this.symbol = this.route.snapshot.paramMap.get('symbol')??'';
     const response = (await lastValueFrom(this.api.getSentiment(this.symbol)));
     this.listMonth = response.data;
+    localStorage
   }
 
 
