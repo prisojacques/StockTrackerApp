@@ -1,5 +1,5 @@
 import {Inject, inject, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {Quote} from "./modele/Quote";
 import {Symbole} from "./modele/Symbole";
@@ -11,11 +11,13 @@ import {SentimentResponse} from "./modele/SentimentResponse";
   providedIn: 'root'
 })
 export class TrackingService {
+
+
   value : []= [];
   symbol = '';
   constructor(private httpClient: HttpClient,
-    @Inject(SESSION_STORAGE)
-    public storage: StorageService) {
+              @Inject(SESSION_STORAGE)
+              public storage: StorageService) {
   }
 
   private token = 'bu4f8kn48v6uehqi3cqg';
@@ -77,6 +79,16 @@ export class TrackingService {
           this.storage.set('stockData', sentimentData);
         }))
       );
+  }
+
+  getSentimentEl(symbol: string) {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('symbol', symbol)
+      .append('token', this.token)
+      .append('from', '2022-08-01')
+      .append('to', '2022-11-01');
+
+    return this.httpClient.get<any>('https://finnhub.io/api/v1/stock/insider-sentiment', {params: queryParams});
   }
   removeStock(){
 

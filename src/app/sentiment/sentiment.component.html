@@ -1,5 +1,21 @@
-<div class="container" *ngFor="let l of listMonth">
-  <h2> Change:{{l.change}}<br /><br />  MSPR:{{ l.mspr}}</h2>
+<div class="row">
+  <p style="font-weight: bold;">({{symbol}})</p>
+</div>
+<div class="row" *ngFor="let l of insiderSentiments">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+
+        <h2> {{l.month}}<br /><br /> Change:{{l.change}}<br /><br />  MSPR:{{ l.MSPR}}<br /><br /></h2>
+      </div>
+      <div class="col">
+        <span style="font-size: 50px; color: red;" *ngIf="l.change <= 0">↓</span>
+        <span style="font-size: 50px; color: green;" *ngIf="l.change > 0">↑</span>
+
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <div>

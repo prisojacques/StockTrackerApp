@@ -1,0 +1,10 @@
+style{
+  font-size: 50px;
+  color: red;
+}
+.row{
+  border-bottom: 5px;
+  padding-left: 50px;
+  position: center;
+
+}

@@ -14,14 +14,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class StocksymbolComponent implements OnInit {
 
-value!: string;
-result2!: any [];
-result!: Quote [];
-search!: FormGroup;
+  value!: string;
+  result2!: any [];
+  result!: Quote [];
+  search!: FormGroup;
 
   constructor(private trackingservice: TrackingService, private fb: FormBuilder) {
     this.search = this.fb.group({
-        symbol: ['', Validators.required]
+      symbol: ['', Validators.required]
     });
   }
 

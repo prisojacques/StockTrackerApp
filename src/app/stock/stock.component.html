@@ -1,25 +1,28 @@
 <div class="container" *ngFor="let q of quote; let i = index">
 
 
-<div>
-  <button (click)="deleteById(i)" class="button"  type="button" id="remove{{symbol[i]}}}">  &#10060; </button>
+  <div>
+    <button (click)="deleteById(i)" class="button"  type="button" id="remove{{symbol[i]}}}">  &#10060; </button>
 
-  <h2>{{ symbol[i].description }}({{ symbol[i].symbol }}) </h2>
-
-
+    <h2>{{ symbol[i].description }}({{ symbol[i].symbol }}) </h2>
 
 
-</div>
-<div class="stock-name">
-  Change today: {{q.d | percent}}<br /><br />                 Opening price: {{q.o | currency}}<br /><br />
 
-  Current price: {{q.c | currency}}<br /><br />                 High price: {{q.h | currency}} <br /><br />
 
-  <div class="container">
-
-  <button class="btn btn-primary" (click)="routeNavigate(symbol[i].description)" type="submit">Go to social sentiment details > </button>
   </div>
-</div>
+  <div class="stock-name">
+    Change today: {{q.d | percent}}<br /><br />                 Opening price: {{q.o | currency}}<br /><br />
+
+    Current price: {{q.c | currency}}<br /><br />                 High price: {{q.h | currency}} <br /><br />
+    <span style="font-size: 50px; color: red;" *ngIf="q.d <= 0">↓</span>
+    <span style="font-size: 50px; color: green;" *ngIf="q.d > 0">↑</span>
+
+
+    <div class="container">
+
+      <button class="btn btn-primary" (click)="routeNavigate(symbol[i].symbol)" type="submit">Go to social sentiment details > </button>
+    </div>
+  </div>
 </div>
 
 
